@@ -1,7 +1,20 @@
-from telegram.ext import ( Updater, CommandHandler, MessageHandler, Filters, )
+from telegram.ext import (
+    Updater,
+    CommandHandler,
+    MessageHandler,
+    Filters,
+)
 
 from settings import TOKEN
-from callbacks import start, help, send_cart, send_partnership, send_info, send_language
+from callbacks import (
+    start,
+    help,
+    send_cart,
+    send_partnership,
+    send_info,
+    send_language,
+    send_main_menu,
+)
 
 
 def main() -> None:
@@ -23,27 +36,31 @@ def main() -> None:
             callback=send_cart,
         )
     )
-
     dispatcher.add_handler(
         handler=MessageHandler(
             filters=Filters.text("💼 Hamkorlik"),
             callback=send_partnership,
         )
     )
-   
     dispatcher.add_handler(
         handler=MessageHandler(
             filters=Filters.text("ℹ️ Ma'lumot"),
             callback=send_info,
         )
     )
-
     dispatcher.add_handler(
         handler=MessageHandler(
             filters=Filters.text("🌐 Tilni tanlash"),
             callback=send_language,
         )
     )
+    dispatcher.add_handler(
+        handler=MessageHandler(
+            filters=Filters.text("🏠 Bosh menyu"),
+            callback=send_main_menu,
+        )
+    )
+
     updater.start_polling()
     updater.idle()
 

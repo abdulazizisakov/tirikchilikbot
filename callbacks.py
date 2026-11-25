@@ -4,6 +4,28 @@ from telegram.ext import CallbackContext
 from settings import WEB_APP_URL
 
 
+def main_menu_keyboard() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(
+                    text="🔥 Mahsulotlar",
+                    web_app=WebAppInfo(url=WEB_APP_URL),
+                ),
+                KeyboardButton(text="📥 Savat"),
+            ],
+            [
+                KeyboardButton(text="💼 Hamkorlik"),
+                KeyboardButton(text="ℹ️ Ma'lumot"),
+            ],
+            [
+                KeyboardButton(text="🌐 Tilni tanlash"),
+            ],
+        ],
+        resize_keyboard=True,
+    )
+
+
 def start(update: Update, context: CallbackContext) -> None:
     bot = context.bot
     first_name = update.message.from_user.first_name
@@ -30,25 +52,7 @@ def start(update: Update, context: CallbackContext) -> None:
             "Agar bu shartlar sizni qoniqtirsa, \"🔥 Mahsulotlar\" bo'limiga "
             "o'tish orqali buyurtma berishni boshlashingiz mumkin."
         ),
-        reply_markup=ReplyKeyboardMarkup(
-            keyboard=[
-                [
-                    KeyboardButton(
-                        text="🔥 Mahsulotlar",
-                        web_app=WebAppInfo(url=WEB_APP_URL),
-                    ),
-                    KeyboardButton(text="📥 Savat"),
-                ],
-                [
-                    KeyboardButton(text="💼 Hamkorlik"),
-                    KeyboardButton(text="ℹ️ Ma'lumot"),
-                ],
-                [
-                    KeyboardButton(text="🌐 Tilni tanlash"),
-                ],
-            ],
-            resize_keyboard=True,
-        ),
+        reply_markup=main_menu_keyboard(),
     )
 
 
@@ -118,4 +122,14 @@ def send_language(update: Update, context: CallbackContext) -> None:
             "Iltimos, tilni tanlang\n"
             "Пожалуйста, выберите язык ⬇️"
         ),
+    )
+
+
+def send_main_menu(update: Update, context: CallbackContext) -> None:
+    bot = context.bot
+
+    bot.send_message(
+        chat_id=update.message.chat.id,
+        text="Bosh menyu",
+        reply_markup=main_menu_keyboard(),
     )
