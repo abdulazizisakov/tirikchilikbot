@@ -26,6 +26,24 @@ def main_menu_keyboard() -> ReplyKeyboardMarkup:
     )
 
 
+def info_menu_keyboard() -> ReplyKeyboardMarkup:
+    return ReplyKeyboardMarkup(
+        keyboard=[
+            [
+                KeyboardButton(text="✍️ Izoh qoldirish"),
+            ],
+            [
+                KeyboardButton(text="🚀 Yetkazib berish shartlari"),
+                KeyboardButton(text="☎️ Kontaktlar"),
+            ],
+            [
+                KeyboardButton(text="🏠 Bosh menyu"),
+            ],
+        ],
+        resize_keyboard=True,
+    )
+
+
 def start(update: Update, context: CallbackContext) -> None:
     bot = context.bot
     first_name = update.message.from_user.first_name
@@ -95,21 +113,7 @@ def send_info(update: Update, context: CallbackContext) -> None:
     bot.send_message(
         chat_id=update.message.chat.id,
         text="Kerakli bo'limni tanlang ⬇️",
-        reply_markup=ReplyKeyboardMarkup(
-            keyboard=[
-                [
-                    KeyboardButton(text="✍️ Izoh qoldirish"),
-                ],
-                [
-                    KeyboardButton(text="🚀 Yetkazib berish shartlari"),
-                    KeyboardButton(text="☎️ Kontaktlar"),
-                ],
-                [
-                    KeyboardButton(text="🏠 Bosh menyu"),
-                ],
-            ],
-            resize_keyboard=True,
-        ),
+        reply_markup=info_menu_keyboard(),
     )
 
 
@@ -132,4 +136,50 @@ def send_main_menu(update: Update, context: CallbackContext) -> None:
         chat_id=update.message.chat.id,
         text="Bosh menyu",
         reply_markup=main_menu_keyboard(),
+    )
+
+
+def send_feedback(update: Update, context: CallbackContext) -> None:
+    bot = context.bot
+
+    bot.send_message(
+        chat_id=update.message.chat.id,
+        text=(
+            "✅ <b>Tirikchilik</b> loyihasini tanlaganingiz uchun rahmat.\n"
+            "Bizning xizmatlarimiz sifatini yaxshilashga yordam bersangiz juda "
+            "xursand bo'lar edik :)\n"
+            "Buning uchun 5 ballik tizim asosida bizni baholang yoki o'z "
+            "tilaklaringizni yozib jo'nating."
+        ),
+        parse_mode="HTML",
+        reply_markup=ReplyKeyboardMarkup(
+            keyboard=[
+                [
+                    KeyboardButton(text="😊Menga hamma narsa yoqdi, 5 ❤️"),
+                ],
+                [
+                    KeyboardButton(text="☺️Yaxshi, 4 ⭐️⭐️⭐️⭐️"),
+                ],
+                [
+                    KeyboardButton(text="😐Qo'niqarli, 3⭐️⭐️⭐️"),
+                ],
+                [
+                    KeyboardButton(text="☹️Yoqmadi, 2 ⭐️⭐️"),
+                ],
+                [
+                    KeyboardButton(text="😠Juda yomon, 1 ⭐️"),
+                ],
+            ],
+            resize_keyboard=True,
+        ),
+    )
+
+
+def save_rating(update: Update, context: CallbackContext) -> None:
+    bot = context.bot
+
+    bot.send_message(
+        chat_id=update.message.chat.id,
+        text="Bahoingiz uchun rahmat! 😊",
+        reply_markup=info_menu_keyboard(),
     )

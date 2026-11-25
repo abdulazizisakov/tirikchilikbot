@@ -14,6 +14,8 @@ from callbacks import (
     send_info,
     send_language,
     send_main_menu,
+    send_feedback,
+    save_rating,
 )
 
 
@@ -58,6 +60,26 @@ def main() -> None:
         handler=MessageHandler(
             filters=Filters.text("🏠 Bosh menyu"),
             callback=send_main_menu,
+        )
+    )
+    dispatcher.add_handler(
+        handler=MessageHandler(
+            filters=Filters.text("✍️ Izoh qoldirish"),
+            callback=send_feedback,
+        )
+    )
+    dispatcher.add_handler(
+        handler=MessageHandler(
+            filters=Filters.text(
+                [
+                    "😊Menga hamma narsa yoqdi, 5 ❤️",
+                    "☺️Yaxshi, 4 ⭐️⭐️⭐️⭐️",
+                    "😐Qo'niqarli, 3⭐️⭐️⭐️",
+                    "☹️Yoqmadi, 2 ⭐️⭐️",
+                    "😠Juda yomon, 1 ⭐️",
+                ]
+            ),
+            callback=save_rating,
         )
     )
 
