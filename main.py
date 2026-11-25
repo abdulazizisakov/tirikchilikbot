@@ -1,7 +1,7 @@
 from telegram.ext import ( Updater, CommandHandler, MessageHandler, Filters, )
 
 from settings import TOKEN
-from callbacks import start, help, send_cart, send_partnership, send_info
+from callbacks import start, help, send_cart, send_partnership, send_info, send_language
 
 
 def main() -> None:
@@ -30,6 +30,7 @@ def main() -> None:
             callback=send_partnership,
         )
     )
+   
     dispatcher.add_handler(
         handler=MessageHandler(
             filters=Filters.text("ℹ️ Ma'lumot"),
@@ -37,6 +38,12 @@ def main() -> None:
         )
     )
 
+    dispatcher.add_handler(
+        handler=MessageHandler(
+            filters=Filters.text("🌐 Tilni tanlash"),
+            callback=send_language,
+        )
+    )
     updater.start_polling()
     updater.idle()
 

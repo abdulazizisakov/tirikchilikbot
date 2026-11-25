@@ -107,3 +107,15 @@ def send_info(update: Update, context: CallbackContext) -> None:
             resize_keyboard=True,
         ),
     )
+
+
+def send_language(update: Update, context: CallbackContext) -> None:
+    bot = context.bot
+
+    bot.send_message(
+        chat_id=update.message.chat.id,
+        text=(
+            "Iltimos, tilni tanlang\n"
+            "Пожалуйста, выберите язык ⬇️"
+        ),
+    )
