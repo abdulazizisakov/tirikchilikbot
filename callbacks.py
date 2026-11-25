@@ -83,3 +83,27 @@ def send_partnership(update: Update, context: CallbackContext) -> None:
             "Menejer bilan bog'lanish uchun: @tirik_chilik"
         ),
     )
+
+
+def send_info(update: Update, context: CallbackContext) -> None:
+    bot = context.bot
+
+    bot.send_message(
+        chat_id=update.message.chat.id,
+        text="Kerakli bo'limni tanlang ⬇️",
+        reply_markup=ReplyKeyboardMarkup(
+            keyboard=[
+                [
+                    KeyboardButton(text="✍️ Izoh qoldirish"),
+                ],
+                [
+                    KeyboardButton(text="🚀 Yetkazib berish shartlari"),
+                    KeyboardButton(text="☎️ Kontaktlar"),
+                ],
+                [
+                    KeyboardButton(text="🏠 Bosh menyu"),
+                ],
+            ],
+            resize_keyboard=True,
+        ),
+    )
