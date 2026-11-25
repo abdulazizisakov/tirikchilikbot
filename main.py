@@ -1,7 +1,7 @@
 from telegram.ext import ( Updater, CommandHandler, MessageHandler, Filters, )
 
 from settings import TOKEN
-from callbacks import start, help, send_cart
+from callbacks import start, help, send_cart, send_partnership
 
 
 def main() -> None:
@@ -21,6 +21,13 @@ def main() -> None:
         handler=MessageHandler(
             filters=Filters.text("📥 Savat"),
             callback=send_cart,
+        )
+    )
+
+    dispatcher.add_handler(
+        handler=MessageHandler(
+            filters=Filters.text("💼 Hamkorlik"),
+            callback=send_partnership,
         )
     )
 

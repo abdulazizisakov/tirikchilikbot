@@ -68,3 +68,18 @@ def send_cart(update: Update, context: CallbackContext) -> None:
         chat_id=update.message.chat.id,
         text="Sizning savatingiz bo'sh",
     )
+
+
+def send_partnership(update: Update, context: CallbackContext) -> None:
+    bot = context.bot
+
+    bot.send_message(
+        chat_id=update.message.chat.id,
+        text=(
+            "Biz sizning kompaniyangiz bilan hamkorlik qilishdan mamnunmiz "
+            "va sizning buyurtmangizga asosan futbolkalar, xudi, svitshot va "
+            "boshqa ko'p narsalarni tayyorlashimiz mumkin.\n"
+            "\n"
+            "Menejer bilan bog'lanish uchun: @tirik_chilik"
+        ),
+    )
